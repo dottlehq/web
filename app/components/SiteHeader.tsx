@@ -30,7 +30,7 @@ export default function SiteHeader() {
                 style={{ backgroundColor: "#5D3FD3" }}
               />
             </div>
-            Coming soon to iOS
+            Coming soon
           </div>
         </div>
       </nav>
