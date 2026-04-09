@@ -10,9 +10,20 @@ export default function WaitlistForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    await new Promise((resolve) => setTimeout(resolve, 600));
-    setSubmitted(true);
-    setLoading(false);
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL ?? ""}/waitlist`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email }),
+        }
+      );
+      if (!res.ok) throw new Error("Request failed");
+      setSubmitted(true);
+    } finally {
+      setLoading(false);
+    }
   };
 
   if (submitted) {
